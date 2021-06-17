@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx
+    tag: alpine
+  name: nginx-alpine
+  namespace: {{ .Values.namespace.name }}
+spec:
+  ports:
+  - port: {{ .Values.port }}
+    protocol: TCP
+    targetPort: {{ .Values.image.port }}
+  selector:
+    app: nginx
+    tag: {{ .Values.image.tag }}
+  type: {{ .Values.image.type }}
